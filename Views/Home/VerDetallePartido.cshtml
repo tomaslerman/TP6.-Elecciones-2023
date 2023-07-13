@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+        .container img
+        {
+            width: 100%;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .credit-list {
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+
+        .credit-list li {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .credit-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Créditos</h1>
+        <ul class="credit-list">
+            <li>Nombre: @ViewBag.datosPartido.Nombre</li>
+            <li>
+                <img src="@ViewBag.datosPartido.Logo" alt="">
+            </li>
+            <li>
+                <a href="@ViewBag.datosPartido.SitioWeb">Sitio web del partido</a>
+            </li>
+            <li>Fecha de fundación: @ViewBag.datosPartido.FechaFundacion</li>
+            <li>Cantidad de diputados: @ViewBag.datosPartido.CantidadDiputados</li>
+            <li>Cantidad de senadores: @ViewBag.datosPartido.CantidadSenadores</li>
+        </ul>
+
+        <a class="btn" href='@Url.Action("AgregarCandidato", new {idPartido = @ViewBag.datosPartido.IdPartido})'>Agregar candidato</a>
+
+        @foreach (var item in ViewBag.listaCandidatos)
+        {
+            <h1>@item.Nombre</h1>
+            <img src="@item.Foto" alt="">
+            <a href='@Url.Action("VerDetalleCandidato", new {idCandidato = @item.IdCandidato})'>Ver información del candidato</a>
+            <a href='@Url.Action("EliminarCandidato", new {idCandidato = @item.IdCandidato, idPartido = @item.IdPartido})'>Eliminar candidato</a>
+        }
+    </div>
+</body>
+</html>

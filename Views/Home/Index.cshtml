@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            background-image: url(Obelisco.webp);
+            background-size: cover;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container h1{
+            text-align: center;
+            color: black;
+            font-size: 80px;
+            padding-bottom: 30px;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .tarjeta-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .tarjeta {
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            width: calc(33.33% - 20px);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tarjeta h1 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .tarjeta img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .tarjeta a {
+            display: block;
+            text-align: center;
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .tarjeta a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="section-title">@ViewData["Title"]</h1>
+        <div class="tarjeta-container">
+            <h1>Partidos politicos Argentina 2023</h1>
+            @foreach (var item in ViewBag.ListadoPartidos)
+            {
+                <div class="tarjeta">
+                    <h1>@item.Nombre</h1>
+                    <img src="@item.Logo" alt="@item.Nombre">
+                    <a href="@Url.Action("VerDetallePartido", new {idPartido = item.IdPartido})">Ver detalle del partido</a>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>
